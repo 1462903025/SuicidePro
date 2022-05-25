@@ -19,20 +19,20 @@ namespace SuicidePro.ContentGun
         {
             if (!Plugin.Instance.Config.ContentGunConfig.Enabled)
             {
-                response = "The Content Gun is not enabled.";
+                response = "安乐枪未启用。";
                 return false;
             }
 
             var player = Player.Get(sender);
             if (player == null)
             {
-                response = "You cannot use this command as the server.";
+                response = "您不能在服务器用此命令。";
                 return false;
             }
 
             if (!player.CheckPermission("cg.give"))
             {
-                response = "You do not have the permission to use the content gun.";
+                response = "您没有使用内容枪的权限。";
                 return false;
             }
 
@@ -41,8 +41,8 @@ namespace SuicidePro.ContentGun
                 var value = (DateTime.Now - cooldown.DeletedAt).TotalSeconds;
                 if (value <= Plugin.Instance.Config.ContentGunConfig.Cooldown && cooldown.UsesLeft <= 0)
                 {
-                    player.ShowHint($"There are <b><color=red>{value}</color>s</b> before you can use the <b><color=red>Content Gun</color> again</b>.");
-                    response = $"You must wait {value}s before being able to get the content gun again.";
+                    player.ShowHint($"需等待<b><color=red>{value}</color>秒</b> 才能再次使用 <b><color=red>安乐枪</color></b>.");
+                    response = $"你必须等待 {value}秒 才能使用安乐枪.";
                     return false;
                 }
             }
@@ -51,8 +51,8 @@ namespace SuicidePro.ContentGun
             {
                 if (Handler.ContentGuns.Contains(item.Base))
                 {
-                    player.ShowHint("You <b>already</b> have a <b><color=red>Content Gun</color></b>.");
-                    response = "You already have a content gun.";
+                    player.ShowHint("你<b>已经</b> 有<b><color=red>安乐枪</color></b>.");
+                    response = "你已经有一把安乐枪了。";
                     return false;
                 }
             }
@@ -65,7 +65,7 @@ namespace SuicidePro.ContentGun
             cg.Ammo = (byte)Plugin.Instance.Config.ContentGunConfig.Uses;
 
             player.ShowHint("You <b>now</b> have a <b><color=red>Content Gun</color></b>.");
-            response = "Gave you a content gun!";
+            response = "给了你一把安乐枪";
             return true;
         }
 

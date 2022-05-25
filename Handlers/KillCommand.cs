@@ -15,7 +15,7 @@ namespace SuicidePro.Handlers
 	{
 		public string Command { get; } = Plugin.Instance.Config.CommandPrefix;
 		public string[] Aliases { get; } = Plugin.Instance.Config.CommandAliases;
-		public string Description { get; } = "A kill command with more features.";
+		public string Description { get; } = "具有更多功能的kill命令。";
 
 		public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
 		{
@@ -23,7 +23,7 @@ namespace SuicidePro.Handlers
 			PlayerCommandSender playerCommandSender = sender as PlayerCommandSender;
 			if (playerCommandSender == null)
 			{
-				response = "You must run this command as a client and not server.";
+				response = "您必须作为客户端而不是服务器运行此命令。";
 				return false;
 			}
 
@@ -32,7 +32,7 @@ namespace SuicidePro.Handlers
 
 			if (Plugin.Instance.Config.HelpCommandAliases.Contains(arg))
 			{
-				var build = new StringBuilder("Here are all the kill commands you can use:\n\n");
+				var build = new StringBuilder("以下是您可以使用的所有kill命令:\n\n");
 				foreach (var commandConfig in Plugin.Instance.Config.KillConfigs)
 				{
 					if (commandConfig.Permission == "none" || player.CheckPermission(FormatPermission(commandConfig)))
@@ -57,7 +57,7 @@ namespace SuicidePro.Handlers
 
 			if (config == null && customConfig == null)
 			{
-				response = $"Could not find any kill command with the name or alias {arg}.";
+				response = $"找不到任何具有名称或别名的kill命令 {arg}.";
 				return false;
 			}
 
@@ -66,19 +66,19 @@ namespace SuicidePro.Handlers
 
 			if (config.Permission != "none" && !player.CheckPermission(FormatPermission(config)))
 			{
-				response = "You do not have the required permissions for this command.";
+				response = "您没有此命令所需的权限";
 				return false;
 			}
 	
 			if (!Round.IsStarted)
 			{
-				response = "The round has not started yet.";
+				response = "回合尚未开始";
 				return false;
 			}
 
 			if (config.BannedRoles.Contains(player.Role) || player.IsDead)
 			{
-				response = "You cannot run this kill variation as your role.";
+				response = "您不能以您的角色运行此kill变体";
 				return false;
 			}
 
@@ -91,7 +91,7 @@ namespace SuicidePro.Handlers
 				var ans = customConfig.Run(player);
 				if (!ans && !Plugin.Instance.Config.AllowRunningDisabledForceRegistered)
 				{
-					response = "This effect is disabled.";
+					response = "此效果已禁用。";
 					return false;
 				}
 			}
@@ -104,10 +104,10 @@ namespace SuicidePro.Handlers
 		{
 			if (config.Permission == "default")
 			{
-				Log.Debug("Permission name is 'default', returning kl." + config.Name, Plugin.Instance.Config.Debug);
+				Log.Debug("权限名称为 default ，返回kl。" + config.Name, Plugin.Instance.Config.Debug);
 				return $"kl.{config.Name}";
 			}
-			Log.Debug("Permission name is not 'default', returning " + config.Permission, Plugin.Instance.Config.Debug);
+			Log.Debug("权限名称不是 default ，正在返回 " + config.Permission, Plugin.Instance.Config.Debug);
 			return config.Permission;
 		}
 	}

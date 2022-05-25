@@ -13,17 +13,17 @@ namespace SuicidePro.Configuration
 	{
 		public bool IsEnabled { get; set; } = true;
 
-		[Description("Name of kill command, for example .kill or you can change it to for example bruh, then the command will be .bruh")]
+		[Description("例如，kill命令的名称，.kill或您可以将其更改为例如bruh，则命令将为.bruh")]
 		public string CommandPrefix { get; set; } = "kill";
 
-		[Description("If one of these is used, it will still summon the kill command.")]
+		[Description("如果使用其中一个，它仍然会调用kill命令.")]
 		public string[] CommandAliases { get; set; } = 
 		{
 			"die",
 			"suicide"
 		};
 
-		[Description("If .<command prefix/alias> <any of these> is used, it will show a helpful message showing all variations usable.")]
+		[Description("如果<如果使用命令前缀/别名><其中任何一个>，它将显示一条有用的消息，显示所有可用的变体。")]
 		public string[] HelpCommandAliases { get; set; } =
 		{
 			"help",
@@ -31,7 +31,7 @@ namespace SuicidePro.Configuration
 			"list"
 		};
 
-		[Description("Default kill configs that are not special but just use velocity. You can add your own by copying and pasting one")]
+		[Description("默认kill配置不是特殊的，只是使用速度。您可以通过复制和粘贴来添加自己的")]
 		public List<CustomHandlerCommandConfig> KillConfigs { get; set; } = new List<CustomHandlerCommandConfig>
 		{
 			new CustomHandlerCommandConfig(),
@@ -42,35 +42,35 @@ namespace SuicidePro.Configuration
 			new CustomHandlerCommandConfig {Name = "???", Description = "I don't even know what this will do.", Permission = "default", Response = "bruh", DamageHandler = new CustomDamageHandler {Reason = "???", Velocity = new Velocity(70, 70, 70)}}
 		};
 
-		[Description("Configuration for the Explode effect.")]
+		[Description("爆炸效果的配置。")]
 		public Explode ExplodeEffect { get; set; } = new Explode
 		{
 			Config = new EffectConfig
 			{
 				Aliases = new[] {"boom"}, Name = "explode", Delay = 0.3f,
-				Description = "Explode! (Does not deal damage or break doors)", Response = "Boom!",
+				Description = "爆炸（不会造成损坏或损坏车门）", Response = "Boom!",
 				DamageHandler = new CustomDamageHandler {Reason = "Boom!", Velocity = new Velocity(2, 0, 0)}
 			}
 		};
 		
-		[Description("Configuration for the Disintegrate effect.")]
+		[Description("分解效果的配置。")]
 		public Disintegrate DisintegrateEffect { get; set; } = new Disintegrate
 		{
 			Config = new EffectConfig
 			{
 				Aliases = new[] {"raygun"}, Name = "disintegrate",
-				Description = "Destroy your body!", Response = "Disintegrated",
+				Description = "摧毁你的身体！", Response = "Disintegrated",
 				IgnoreDamageHandlerConfigs = true
 			}
 		};
 
-		[Description("Enables debug messages in the console.")]
+		[Description("在控制台中启用调试消息。")]
 		public bool Debug { get; set; }
 
-		[Description("Whether you will still be able to run disabled effects that are force registered by its developer.")]
+		[Description("您是否仍然能够运行由其开发人员强制注册的禁用效果。")]
 		public bool AllowRunningDisabledForceRegistered { get; set; }
 
-		[Description("Configuration for the Content Gun, summoned using .contentgun and requires cg.give permission")]
+		[Description("安乐枪的配置，使用调用。contentgun和需要命令 .give permission")]
 		public ContentGunConfigClass ContentGunConfig { get; set; } = new ContentGunConfigClass();
 
 		public class BaseCommandConfig
@@ -78,20 +78,20 @@ namespace SuicidePro.Configuration
 			/// <summary>
 			/// Name of the command in .kill
 			/// </summary>
-			[Description("The name that will be used, for example .kill test -- if this is default, then running .kill will run this command.")]
+			[Description("将使用的名称，, 比如 .kill 测试 -- 如果这是默认设置，则运行 .kill 将运行此命令。")]
 			public string Name { get; set; } = "default";
 
 			/// <summary>
 			/// The description of the command in .kill list
 			/// </summary>
-			[Description("The command's description in the kill list")]
-            public string Description { get; set; } = "The default kill command. Simply kills you.";
+			[Description("kill列表中的命令描述")]
+            public string Description { get; set; } = "默认的kill命令。会要了你的命";
 
 			/// <summary>
 			/// The response in the console.
 			/// </summary>
-			[Description("Response in console after using the command")]
-            public string Response { get; set; } = "You died.";
+			[Description("使用命令后控制台中的响应")]
+            public string Response { get; set; } = "寄.";
 
 			/// <summary>
 			/// The EXILED permission required for this command.
@@ -105,25 +105,25 @@ namespace SuicidePro.Configuration
 			/// <summary>
 			/// Other <see cref="string"/>s usable for the command.
 			/// </summary>
-			[Description("Other names that will still run the command")]
+			[Description("仍将运行该命令的其他名称")]
             public string[] Aliases { get; set; } = Array.Empty<string>();
 
 			/// <summary>
 			/// A <see cref="List{T}"/> of <see cref="RoleType"/>, that when the player is a role that is contained within the list, prevents execution of the command.
 			/// </summary>
-			[Description("RoleTypes that are not allowed to use this command.")]
+			[Description("不允许使用此命令的角色类型。")]
             public List<RoleType> BannedRoles { get; set; } = new List<RoleType>();
 
 			/// <summary>
 			/// <see cref="float"/> in seconds to wait before the <see cref="Exiled.API.Features.Player"/>'s death is applied.
 			/// </summary>
-			[Description("Number of seconds to wait before player's death is applied.")]
+			[Description("玩家死亡前等待的秒数。")]
             public float Delay { get; set; }
 		}
 
 		public class CustomHandlerCommandConfig : BaseCommandConfig
 		{
-			[Description("A handler for mostly things after the death.")]
+			[Description("死后处理大部分事情的人。")]
 			public CustomDamageHandler DamageHandler { get; set; } = new CustomDamageHandler();
 		}
 
@@ -136,8 +136,8 @@ namespace SuicidePro.Configuration
 				UpVelocity = upVelocity;
 			}*/
 
-			[Description("Death reason in ragdoll info.")]
-			public string Reason { get; set; } = "Suicided.";
+			[Description("分解死亡的信息.")]
+			public string Reason { get; set; } = "自杀.";
 
 			[Description("C.A.S.S.I.E. announcement if the player is an SCP.")]
 			public string CassieIfScp { get; set; } = String.Empty;
@@ -147,14 +147,14 @@ namespace SuicidePro.Configuration
 
 		public class ContentGunConfigClass
 		{
-			[Description("If .contentgun command is enabled.")]
+			[Description("如果 .contentgun 命令开启")]
 			public bool Enabled { get; set; }
-			[Description("Velocity (strength, sort of) of the body that will be created upon shooting.")]
+			[Description("射击时产生的身体速度（力量，种类）。")]
 			public Velocity Velocity { get; set; } = new Velocity(10, 1, 0);
 			[Description("The ragdoll's name in ragdoll info.")]
-			public string RagdollName { get; set; } = "Nerd";
+			public string RagdollName { get; set; } = "傻逼（翻译如此别骂我）";
 			[Description("Death reason in ragdoll info.")]
-			public string DeathCause { get; set; } = "Spawned using the Content Gun!";
+			public string DeathCause { get; set; } = "寄于安乐枪";
 			[Description("The RoleType of the created ragdoll.")]
 			public RoleType RagdollRoleType { get; set; } = RoleType.Scientist;
 			[Description("The size of the created ragdoll.")]
